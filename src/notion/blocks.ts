@@ -1,4 +1,4 @@
-import {richText, supportedCodeLang} from './common';
+import {richText, supportedCodeLang, EmojiRequest, ApiColor} from './common';
 import {AppendBlockChildrenParameters} from '@notionhq/client/build/src/api-endpoints';
 
 export type Block = AppendBlockChildrenParameters['children'][number];
@@ -177,6 +177,36 @@ export function equation(value: string): Block {
     type: 'equation',
     equation: {
       expression: value,
+    },
+  };
+}
+
+export function toggle(
+  text: RichText[],
+  children: BlockWithoutChildren[] = []
+): Block {
+  return {
+    object: 'block',
+    type: 'toggle',
+    toggle: {
+      rich_text: text,
+      children: children.length ? children : undefined,
+    },
+  };
+}
+
+export function callout(
+  text: RichText[],
+  icon: {emoji: EmojiRequest},
+  color: ApiColor
+): Block {
+  return {
+    object: 'block',
+    type: 'callout',
+    callout: {
+      rich_text: text,
+      icon: icon,
+      color: color,
     },
   };
 }
