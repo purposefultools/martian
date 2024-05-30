@@ -93,12 +93,16 @@ export function headingTwo(text: RichText[]): Block {
   };
 }
 
-export function headingThree(text: RichText[]): Block {
+export function headingThree(
+  text: RichText[],
+  children: BlockWithoutChildren[] = []
+): Block {
   return {
     object: 'block',
     type: 'heading_3',
     heading_3: {
       rich_text: text,
+      children: children.length ? children : undefined,
     },
   };
 }
@@ -184,7 +188,7 @@ export function equation(value: string): Block {
 export function toggle(
   text: RichText[],
   children: BlockWithoutChildren[] = []
-): Block {
+): any {
   return {
     object: 'block',
     type: 'toggle',
